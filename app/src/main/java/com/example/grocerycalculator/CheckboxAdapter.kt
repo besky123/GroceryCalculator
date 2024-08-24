@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 
-class CheckboxAdapter(private val itemList: MutableList<CheckboxItem>):
+class CheckboxAdapter(
+    private val itemList: MutableList<CheckboxItem>,
+    private val onItemChanged: () -> Unit):
     RecyclerView.Adapter<CheckboxAdapter.CheckboxViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CheckboxViewHolder {
@@ -19,12 +21,13 @@ class CheckboxAdapter(private val itemList: MutableList<CheckboxItem>):
         val item = itemList[position]
         holder.checkBox.text = item.text
         holder.checkBox.isChecked = item.isChecked
-        holder.priceTextView.text = "$${item.price}"
+        holder.priceTextView.text = "$%.2f".format(item.price)
 
         Log.d("CheckboxAdapter", "Binding item: ${item.text} with price: ${item.price}")
 
         holder.checkBox.setOnCheckedChangeListener {_, isChecked ->
             item.isChecked = isChecked
+            onItemChanged()
         }
     }
 
@@ -33,6 +36,7 @@ class CheckboxAdapter(private val itemList: MutableList<CheckboxItem>):
     fun addItem(item: CheckboxItem){
         itemList.add(item)
         notifyItemInserted(itemList.size - 1)
+        onItemChanged()
     }
 
     class CheckboxViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

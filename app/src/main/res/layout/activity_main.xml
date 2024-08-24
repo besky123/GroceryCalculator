@@ -14,13 +14,6 @@
         android:text="Shopping List"
         android:textSize="24sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:scrollbars="vertical" />
-
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
@@ -42,4 +35,27 @@
         android:text="Add item"
         android:visibility="visible" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:scrollbars="vertical" />
+
+    <!--Total and Tax Text Views-->
+    <TextView
+        android:id="@+id/totalTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total: $0.00"
+        android:textSize="18sp"
+        android:paddingTop="8dp" />
+
+    <TextView
+        android:id="@+id/taxTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tax: $0.00"
+        android:textSize="18sp"
+        android:paddingTop="4dp" />
 </LinearLayout>
