@@ -26,19 +26,24 @@ class MainActivity : AppCompatActivity() {
 
         val editText = findViewById<EditText>(R.id.editText)
         val addButton = findViewById<Button>(R.id.addButton)
+        val priceEditText = findViewById<EditText>(R.id.priceEditText)
+
 
         addButton.setOnClickListener {
             val itemText = editText.text.toString()
+            val itemPrice = priceEditText.text.toString().toDoubleOrNull()?: 0.0
+
             if (itemText.isNotBlank()){
-                addItemToList(itemText)
+                addItemToList(itemText, itemPrice)
                 editText.text.clear()
+                priceEditText.text.clear()
             }
         }
     }
 
-    private fun addItemToList(itemText: String){
-        val newItem = CheckboxItem(itemText, false)
+    private fun addItemToList(itemText: String, itemPrice: Double){
+        val newItem = CheckboxItem(itemText, false, itemPrice)
         adapter.addItem(newItem)
-        Log.d("MainActivity", "Item added:$itemText")
+        Log.d("MainActivity", "Item added:$itemText with price: $itemPrice")
     }
 }
