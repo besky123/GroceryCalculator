@@ -12,11 +12,27 @@
         android:layout_weight="1"
         android:text="Item" />
 
+    <EditText
+        android:id="@+id/itemEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint = "Item Name" />
+
+    <EditText
+        android:id="@+id/priceEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint = "Price" />
+
+    <!--
     <TextView
         android:id="@+id/priceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Price"
         android:paddingStart="16dp" />
+        -->
 
 </LinearLayout>

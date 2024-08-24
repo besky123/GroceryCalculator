@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 
@@ -19,12 +20,26 @@ class CheckboxAdapter(
     }
     override fun onBindViewHolder(holder: CheckboxViewHolder, position: Int) {
         val item = itemList[position]
-        holder.checkBox.text = item.text
         holder.checkBox.isChecked = item.isChecked
-        holder.priceTextView.text = "$%.2f".format(item.price)
+        holder.itemEditText.setText(item.text)
+        holder.priceEditText.setText(item.price.toString())
 
         Log.d("CheckboxAdapter", "Binding item: ${item.text} with price: ${item.price}")
 
+        holder.itemEditText.setOnFocusChangeListener {_, hasFocus ->
+            if (!hasFocus) {
+                item.text = holder.itemEditText.text.toString()
+                onItemChanged()
+            }
+        }
+
+        holder.priceEditText.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val newPrice = holder.priceEditText.text.toString().toDoubleOrNull()?: item.price
+                item.price = newPrice
+                onItemChanged()
+            }
+        }
         holder.checkBox.setOnCheckedChangeListener {_, isChecked ->
             item.isChecked = isChecked
             onItemChanged()
@@ -41,7 +56,8 @@ class CheckboxAdapter(
 
     class CheckboxViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
-        val priceTextView: TextView = itemView.findViewById(R.id.priceTextView)
+        val itemEditText: EditText = itemView.findViewById(R.id.itemEditText)
+        val priceEditText: TextView = itemView.findViewById(R.id.priceEditText)
     }
 
 }
