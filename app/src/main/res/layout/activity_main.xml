@@ -44,6 +44,14 @@
 
     <!--Total and Tax Text Views-->
     <TextView
+        android:id="@+id/taxTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tax: $0.00"
+        android:textSize="18sp"
+        android:paddingTop="4dp" />
+
+    <TextView
         android:id="@+id/totalTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,11 +59,24 @@
         android:textSize="18sp"
         android:paddingTop="8dp" />
 
-    <TextView
-        android:id="@+id/taxTextView"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tax: $0.00"
-        android:textSize="18sp"
-        android:paddingTop="4dp" />
+        android:text="Save List"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/loadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load List"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/manageFilesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage Files"/>
+
 </LinearLayout>
