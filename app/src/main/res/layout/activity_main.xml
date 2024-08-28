@@ -17,14 +17,14 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:hint="Add an item"
         android:visibility="visible" />
 
     <EditText
         android:id="@+id/priceEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:hint="Enter item price"
         android:inputType="numberDecimal" />
 
@@ -59,24 +59,40 @@
         android:textSize="18sp"
         android:paddingTop="8dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Save List"
-        android:visibility="visible" />
-
+        android:layout_weight="1"
+        android:text="Save List" />
+    <!--
     <Button
         android:id="@+id/loadButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Load List"
         android:visibility="visible" />
-
+-->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2" />
     <Button
         android:id="@+id/manageFilesButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Manage Files"/>
+        android:layout_weight="1"
+        android:text="Manage Files" />
+</LinearLayout>
 
 </LinearLayout>

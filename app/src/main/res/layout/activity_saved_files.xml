@@ -8,6 +8,17 @@
    <ListView
        android:id="@+id/savedFilesListView"
        android:layout_width="match_parent"
-       android:layout_height="match_parent" />
+       android:layout_height="wrap_content"
+       android:layout_above="@+id/newFileButton"
+       android:layout_alignParentTop="true"/>
+
+   <Button
+       android:id="@+id/newFileButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_centerHorizontal="true"
+       android:text="New List"/>
+
 
 </RelativeLayout>

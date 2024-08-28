@@ -18,6 +18,7 @@ import android.widget.TextView
 import java.io.File
 import android.widget.Toast
 import android.widget.ListView
+import androidx.appcompat.app.AlertDialog
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         val priceEditText = findViewById<EditText>(R.id.priceEditText)
         val addButton = findViewById<Button>(R.id.addButton)
         val saveButton = findViewById<Button>(R.id.saveButton)
-        val loadButton = findViewById<Button>(R.id.loadButton)
+        //val loadButton = findViewById<Button>(R.id.loadButton)
         val manageFilesButton = findViewById<Button>(R.id.manageFilesButton)
 
         /**
@@ -77,9 +78,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         saveButton.setOnClickListener {
-            saveListToFile(this, "shopping_list.dat", itemList)
-        }
 
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Enter file Name")
+
+            //User input
+            val input = EditText(this)
+            builder.setView(input)
+
+            //Buttons
+            builder.setPositiveButton("Save") { dialog, _ ->
+                val fileName = input.text.toString()
+                if (fileName.isNotBlank()) {
+                    val formattedFileName = "$fileName.dat"
+                    saveListToFile(this, formattedFileName, itemList)
+                } else {
+                    Toast.makeText(this, "File name cannot be empty", Toast.LENGTH_SHORT).show()
+                }
+            }
+            builder.setNegativeButton("Cancel") { dialog, _-> dialog.cancel() }
+                builder.show()
+
+            }
+/**
         loadButton.setOnClickListener {
             val loadedList = loadListFromFile(this, "shopping_list.dat")
             itemList.clear()
@@ -87,22 +108,31 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
             calculateTotalandTax()
         }
+        **/
         manageFilesLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data = result.data
                 val fileName = data?.getStringExtra("fileName")
                 val action = data?.getStringExtra("action")
 
-                if (fileName != null && action != null) {
-                    when (action) {
-                        "load" -> {
+                when(action){
+                    "load" -> {
+                        if(fileName!=null){
                             val loadedList = loadListFromFile(this, fileName)
                             itemList.clear()
                             itemList.addAll(loadedList)
                             adapter.notifyDataSetChanged()
                             calculateTotalandTax()
                         }
-                        "delete" -> deleteFile(fileName)
+                    }
+                    "new" -> {
+                        itemList.clear()
+                        adapter.notifyDataSetChanged()
+                        calculateTotalandTax()
+                        Toast.makeText(this,"New List Created", Toast.LENGTH_SHORT).show()
+                    }
+                    "delete" ->{
+                        if(fileName!=null) deleteF(fileName)
                     }
                 }
             }

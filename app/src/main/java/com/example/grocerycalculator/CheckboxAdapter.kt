@@ -21,8 +21,11 @@ class CheckboxAdapter(
     override fun onBindViewHolder(holder: CheckboxViewHolder, position: Int) {
         val item = itemList[position]
         holder.checkBox.isChecked = item.isChecked
+        holder.checkBox.text = ""
         holder.itemEditText.setText(item.text)
-        holder.priceEditText.setText(item.price.toString())
+
+        val formattedPrice = String.format("$%.2f", item.price)
+        holder.priceEditText.setText(formattedPrice)
 
         Log.d("CheckboxAdapter", "Binding item: ${item.text} with price: ${item.price}")
 
@@ -36,7 +39,9 @@ class CheckboxAdapter(
         holder.priceEditText.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 val newPrice = holder.priceEditText.text.toString().toDoubleOrNull()?: item.price
-                item.price = newPrice
+                val formattedNewPrice = String.format("%.2f", newPrice)
+                item.price = formattedNewPrice.toDouble()
+                holder.priceEditText.setText(formattedNewPrice)
                 onItemChanged()
             }
         }
